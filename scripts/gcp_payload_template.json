@@ -1,0 +1,92 @@
+{
+  "name": "GCP",
+  "provider_type": "Google Cloud Platform",
+  "account_preference": "single",
+  "sync_interval": "15",
+  "desired_state": "enabled",
+  "credential_preference": {
+    "credential_type": "static"
+  },
+  "destination_types_enabled": ["DNS"],
+  "source_configs": [
+    {
+      "cloud_credential_id": "{{cloud_credential_id}}",
+      "restricted_to_accounts": ["{{project_id}}"],
+      "credential_config": {
+        "access_identifier": "{{project_id}}"
+      }
+    }
+  ],
+  "additional_config": {
+    "excluded_accounts": [],
+    "forward_zone_enabled": false,
+    "internal_ranges_enabled": false,
+    "federated_realms": [],
+    "object_type": {
+      "version": 1,
+      "discover_new": true,
+      "objects": [
+        {
+          "category": { "id": "security", "excluded": false },
+          "resource_set": [
+            { "id": "security_groups", "excluded": false }
+          ]
+        },
+        {
+          "category": { "id": "compute", "excluded": false },
+          "resource_set": [
+            { "id": "projects", "excluded": false },
+            { "id": "disks", "excluded": false },
+            { "id": "instance-groups", "excluded": false }
+          ]
+        },
+        {
+          "category": { "id": "monitoring", "excluded": false },
+          "resource_set": [
+            { "id": "metrics", "excluded": false }
+          ]
+        },
+        {
+          "category": { "id": "networking-basics", "excluded": false },
+          "resource_set": [
+            { "id": "routes", "excluded": false },
+            { "id": "network-load-balancers", "excluded": false },
+            { "id": "compute-addresses", "excluded": false },
+            { "id": "compute_routers", "excluded": false },
+            { "id": "compute_router_nat_mapping_infos", "excluded": false },
+            { "id": "compute_vpn_gateways", "excluded": false },
+            { "id": "compute_target_vpn_gateways", "excluded": false },
+            { "id": "compute_vpn_tunnels", "excluded": false }
+          ]
+        },
+        {
+          "category": { "id": "storage", "excluded": false },
+          "resource_set": [
+            { "id": "storage-buckets", "excluded": false },
+            { "id": "storage-bucket-policies", "excluded": false }
+          ]
+        },
+        {
+          "category": { "id": "networking-advanced", "excluded": false },
+          "resource_set": [
+            { "id": "gke", "excluded": false },
+            { "id": "internal-ranges", "excluded": false }
+          ]
+        }
+      ]
+    }
+  },
+  "destinations": [
+    {
+      "destination_type": "DNS",
+      "config": {
+        "dns": {
+          "consolidated_zone_data_enabled": false,
+          "view_id": "{{dns_view_id}}",
+          "sync_type": "read_only",
+          "resolver_endpoints_sync_enabled": false
+        }
+      }
+    }
+  ]
+}

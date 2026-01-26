@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Creates an IAM Role named 'infoblox_discovery' with ReadOnlyAccess permissions.
+  Access is granted only to the specified Principal ID with an External ID.
+
+Parameters:
+  ExternalId:
+    Type: String
+    Description: External ID for third-party access (e.g., Infoblox)
+    Default: "fd73371c-05e7-4224-bd9f-c072191f66c1"
+
+  AccountId:
+    Type: String
+    Description: The AWS account ID of the third-party service that assumes this role.
+    Default: "902917483333"
+
+Resources:
+  InfobloxDiscoveryRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "infoblox_discovery"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AccountId}:root"
+            Action: "sts:AssumeRole"
+            Condition:
+              StringEquals:
+                "sts:ExternalId": !Ref ExternalId
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/ReadOnlyAccess"
+      Tags:
+        - Key: "CreatedBy"
+          Value: "CloudFormation"
+        - Key: "RolePurpose"
+          Value: "Infoblox Discovery Access"
+
+Outputs:
+  RoleARN:
+    Description: "ARN of the created IAM role"
+    Value: !GetAtt InfobloxDiscoveryRole.Arn
