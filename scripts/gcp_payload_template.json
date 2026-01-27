@@ -83,7 +83,7 @@
         "dns": {
           "consolidated_zone_data_enabled": false,
           "view_id": "{{dns_view_id}}",
-          "sync_type": "read_only",
+          "sync_type": "read_write",
           "resolver_endpoints_sync_enabled": false
         }
       }

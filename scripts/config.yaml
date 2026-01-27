@@ -11,22 +11,6 @@ realm:
     env: "instruqt"
 
 blocks:
-  - name: "AWS"
-    address: "10.20.0.0"
-    cidr: 16
-    comment: "Top-level AWS block"
-    tags:
-      env: "instruqt"
-      owner: "igor"
-
-  - name: "Azure"
-    address: "10.10.0.0"
-    cidr: 16
-    comment: "Top-level Azure block"
-    tags:
-      env: "instruqt"
-      owner: "igor"
-
   - name: "GCP"
     address: "10.30.0.0"
     cidr: 16
