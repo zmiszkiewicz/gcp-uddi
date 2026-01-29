@@ -119,3 +119,19 @@ resource "google_compute_instance" "vm_instance" {
 
   tags = ["web"]
 }
+
+resource "google_dns_managed_zone" "private-zone" {
+  name        = "private-zone"
+  dns_name    = "private.example."
+  description = "Example private DNS zone created for lab"
+  project = var.project
+  visibility = "private"
+
+  private_visibility_config {
+    networks {
+      network_url = google_compute_network.vpc.id
+    }
+  }
+}
+
+
