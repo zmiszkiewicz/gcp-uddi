@@ -2,7 +2,7 @@
   "name": "GCP",
   "provider_type": "Google Cloud Platform",
   "account_preference": "single",
-  "sync_interval": "auto",
+  "sync_interval": "Auto",
   "desired_state": "enabled",
   "credential_preference": {
     "credential_type": "static"
